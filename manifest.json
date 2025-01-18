@@ -15,7 +15,8 @@
     }
   ],
   "action": {
-    "default_title": "Term Explainer"
+    "default_title": "Term Explainer",
+    "default_popup": "options.html"
   },
   "options_page": "options.html"
 }
