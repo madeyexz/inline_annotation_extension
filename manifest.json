@@ -1,0 +1,21 @@
+{
+  "name": "Innline annotation Extension",
+  "description": "將網頁中的專有名詞改寫為「專有名詞（簡單解釋）」的形式",
+  "version": "0.0.1",
+  "manifest_version": 3,
+  "permissions": ["storage", "activeTab", "scripting"],
+  "host_permissions": ["<all_urls>"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["contentScript.js"]
+    }
+  ],
+  "action": {
+    "default_title": "Term Explainer"
+  },
+  "options_page": "options.html"
+}
