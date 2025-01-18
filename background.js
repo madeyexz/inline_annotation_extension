@@ -23,8 +23,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
 async function processTextWithOpenAI(text) {
   try {
-    // Get the API key from storage
-    const result = await chrome.storage.sync.get(["openaiApiKey"]);
+    const result = await chrome.storage.sync.get(["openaiApiKey", "familiarTopics"]);
     if (!result.openaiApiKey) {
       throw new Error("OpenAI API key not found. Please set it in the extension options.");
     }
@@ -32,8 +31,12 @@ async function processTextWithOpenAI(text) {
     const apiUrl = "https://api.openai.com/v1/chat/completions";
     const model = "gpt-4o-mini";
 
+    // Include familiar topics in the system instruction
+    const familiarTopics = result.familiarTopics ? result.familiarTopics.split(',').map(topic => topic.trim()).join(', ') : '';
     const systemInstruction = `
-      你的任務是將文字中的所有「專有名詞」替換成 「專有名詞（簡單解釋）」的形式。請保持其他文字內容不變。
+      你的任務是將文字中對於用戶而言冷門的「專有名詞」替換成 「專有名詞（一句話簡單解釋）」的形式。你可以假設用戶的認知起點是大學畢業生的認知起點。請保持其他文字內容不變。
+
+      此外，不要對以下領域的詞添加註釋，除非這是該領域的冷門詞彙：${familiarTopics}.
     `;
 
     const requestBody = {
@@ -62,7 +65,6 @@ async function processTextWithOpenAI(text) {
     return data.choices[0].message.content;
 
   } catch (error) {
-    // Fallback to setTimeout if API call fails
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         const processedText = text.toUpperCase(); // Example transformation

@@ -1,13 +1,46 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Innline annotation Extension - Options</title>
+    <title>Extension Options</title>
+    <style>
+      /* Add some basic styling */
+      body {
+        font-family: Arial, sans-serif;
+      }
+      label {
+        display: block;
+        margin-top: 10px;
+      }
+      input[type="text"] {
+        width: 100%;
+        padding: 5px;
+      }
+      button {
+        margin-top: 10px;
+      }
+    </style>
   </head>
   <body>
-    <h1>Innline annotation Extension - Options</h1>
+    <h1>Extension Options</h1>
     <label for="apiKey">OpenAI API Key:</label>
-    <input type="text" id="apiKey" />
-    <button id="saveBtn">Save</button>
+    <input
+      type="password"
+      id="apiKey"
+      placeholder="Enter your OpenAI API key"
+    />
+
+    <label for="familiarTopics">Familiar Topics:</label>
+    <p>
+      Enter topics you are familiar with, you can be descriptive. For example:
+      college level physics except electromagnetism
+    </p>
+    <input
+      type="text"
+      id="familiarTopics"
+      placeholder="Enter topics you are familiar with"
+    />
+
+    <button id="save">Save</button>
 
     <script src="options.js"></script>
   </body>
