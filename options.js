@@ -60,9 +60,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Toggle extension
     toggleBtn.addEventListener("click", () => {
+        console.log("Toggle button clicked");
         chrome.storage.sync.get(["extensionEnabled"], (result) => {
+            console.log("Current extensionEnabled state:", result.extensionEnabled);
             const newState = !result.extensionEnabled;
             chrome.storage.sync.set({ extensionEnabled: newState }, () => {
+                console.log("New extensionEnabled state set to:", newState);
                 toggleBtn.textContent = newState ? "Disable Extension" : "Enable Extension";
                 showStatus(`Extension ${newState ? 'enabled' : 'disabled'}`);
             });
