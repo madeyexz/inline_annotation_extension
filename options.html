@@ -1,49 +1,161 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Extension Options</title>
+    <title>Innline Annotation Settings</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+    />
     <style>
-      /* Add some basic styling */
       body {
-        font-family: Arial, sans-serif;
+        font-family: "Inter", sans-serif;
+        max-width: 600px;
+        margin: 2rem auto;
+        padding: 0 2rem;
+        background: #f9fafb;
+        color: #1f2937;
+        line-height: 1.5;
       }
+
+      .container {
+        background: white;
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin: 0 0 1.5rem 0;
+        color: #111827;
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+
       label {
         display: block;
-        margin-top: 10px;
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+        color: #374151;
       }
+
+      .description {
+        font-size: 0.875rem;
+        color: #6b7280;
+        margin-bottom: 0.5rem;
+      }
+
+      input[type="password"],
       input[type="text"] {
         width: 100%;
-        padding: 5px;
+        padding: 0.75rem;
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+        font-size: 0.875rem;
+        transition: border-color 0.15s ease;
+        box-sizing: border-box;
       }
+
+      input[type="password"]:focus,
+      input[type="text"]:focus {
+        outline: none;
+        border-color: #2563eb;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+      }
+
+      .button-group {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2rem;
+      }
+
       button {
-        margin-top: 10px;
+        padding: 0.75rem 1.5rem;
+        border-radius: 6px;
+        font-weight: 500;
+        font-size: 0.875rem;
+        cursor: pointer;
+        transition: all 0.15s ease;
+      }
+
+      #save {
+        background: #2563eb;
+        color: white;
+        border: none;
+      }
+
+      #save:hover {
+        background: #1d4ed8;
+      }
+
+      #toggleExtension {
+        background: white;
+        color: #374151;
+        border: 1px solid #d1d5db;
+      }
+
+      #toggleExtension:hover {
+        background: #f9fafb;
+      }
+
+      .status-message {
+        display: none;
+        padding: 0.75rem;
+        border-radius: 6px;
+        margin-top: 1rem;
+        font-size: 0.875rem;
+      }
+
+      .success {
+        background: #ecfdf5;
+        color: #065f46;
+        border: 1px solid #6ee7b7;
+      }
+
+      .error {
+        background: #fef2f2;
+        color: #991b1b;
+        border: 1px solid #fecaca;
       }
     </style>
   </head>
   <body>
-    <h1>Extension Options</h1>
-    <label for="apiKey">OpenAI API Key:</label>
-    <input
-      type="password"
-      id="apiKey"
-      placeholder="Enter your OpenAI API key"
-    />
+    <div class="container">
+      <h1>Innline Annotation Settings</h1>
 
-    <label for="familiarTopics">Familiar Topics:</label>
-    <p>
-      Enter topics you are familiar with, you can be descriptive. For example:
-      college level physics except electromagnetism
-    </p>
-    <input
-      type="text"
-      id="familiarTopics"
-      placeholder="Enter topics you are familiar with"
-    />
+      <div class="form-group">
+        <label for="apiKey">OpenAI API Key</label>
+        <div class="description">
+          Your API key will be stored securely and used only for text
+          processing.
+        </div>
+        <input type="password" id="apiKey" placeholder="sk-..." />
+      </div>
 
-    <button id="toggleExtension">Toggle Extension</button>
+      <div class="form-group">
+        <label for="familiarTopics">Familiar Topics</label>
+        <div class="description">
+          Enter topics you're familiar with to prevent unnecessary explanations.
+          Example: "college level physics, computer programming, machine
+          learning"
+        </div>
+        <input
+          type="text"
+          id="familiarTopics"
+          placeholder="Enter comma-separated topics..."
+        />
+      </div>
 
-    <button id="save">Save</button>
+      <div class="button-group">
+        <button id="save">Save Settings</button>
+        <button id="toggleExtension">Disable Extension</button>
+      </div>
 
+      <div id="statusMessage" class="status-message"></div>
+    </div>
     <script src="options.js"></script>
   </body>
 </html>

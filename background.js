@@ -34,7 +34,7 @@ async function processTextWithOpenAI(text) {
     // Include familiar topics in the system instruction
     const familiarTopics = result.familiarTopics ? result.familiarTopics.split(',').map(topic => topic.trim()).join(', ') : '';
     const systemInstruction = `
-      你的任務是將文字中對於用戶而言冷門的「專有名詞」替換成 「專有名詞（一句話簡單解釋）」的形式。你可以假設用戶的認知起點是大學畢業生的認知起點。請保持其他文字內容不變。
+      你的任務是將文字中對於用戶而言冷門的「專有名詞」替換成 「專有名詞（一句話簡單解釋）」的形式。不要解釋任何顯而易見的專有名詞。你可以假設用戶的認知起點是大學畢業生的認知起點。請保持其他文字內容不變。
 
       此外，不要對以下領域的詞添加註釋，除非這是該領域的冷門詞彙：${familiarTopics}.
     `;

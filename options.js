@@ -2,17 +2,18 @@
 
 document.addEventListener("DOMContentLoaded", () => {
     const apiKeyInput = document.getElementById("apiKey");
-    const saveBtn = document.getElementById("saveBtn");
-    const familiarTermsInput = document.getElementById("familiarTerms");
+    const saveBtn = document.getElementById("save");
+    const familiarTopicsInput = document.getElementById("familiarTopics");
     const toggleBtn = document.getElementById("toggleExtension");
+    const statusMessage = document.getElementById("statusMessage");
 
-    // 從 storage 讀取
+    // Load saved settings
     chrome.storage.sync.get(["openaiApiKey", "familiarTopics", "extensionEnabled"], (result) => {
         if (result.openaiApiKey) {
             apiKeyInput.value = result.openaiApiKey;
         }
         if (result.familiarTopics) {
-            familiarTermsInput.value = result.familiarTopics;
+            familiarTopicsInput.value = result.familiarTopics;
         }
         if (result.extensionEnabled === undefined) {
             chrome.storage.sync.set({ extensionEnabled: true });
@@ -22,23 +23,48 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // 存到 storage
+    // Show status message
+    const showStatus = (message, isError = false) => {
+        const statusMessage = document.getElementById("statusMessage");
+        if (!statusMessage) {
+            console.error("Status message element not found");
+            return;
+        }
+
+        statusMessage.textContent = message;
+        statusMessage.style.display = "block";
+        statusMessage.className = `status-message ${isError ? 'error' : 'success'}`;
+
+        setTimeout(() => {
+            statusMessage.style.display = "none";
+        }, 3000);
+    };
+
+    // Save settings
     saveBtn.addEventListener("click", () => {
         const apiKey = apiKeyInput.value.trim();
-        const familiarTopics = familiarTermsInput.value.trim();
+        const familiarTopics = familiarTopicsInput.value.trim();
 
-        chrome.storage.sync.set({ openaiApiKey: apiKey, familiarTopics: familiarTopics }, () => {
-            console.log('Settings saved');
-            alert('Settings saved');
+        if (!apiKey) {
+            showStatus("Please enter an API key", true);
+            return;
+        }
+
+        chrome.storage.sync.set({
+            openaiApiKey: apiKey,
+            familiarTopics: familiarTopics
+        }, () => {
+            showStatus("Settings saved successfully!");
         });
     });
 
-    // Toggle extension state
+    // Toggle extension
     toggleBtn.addEventListener("click", () => {
-        chrome.storage.sync.get("extensionEnabled", (result) => {
+        chrome.storage.sync.get(["extensionEnabled"], (result) => {
             const newState = !result.extensionEnabled;
             chrome.storage.sync.set({ extensionEnabled: newState }, () => {
                 toggleBtn.textContent = newState ? "Disable Extension" : "Enable Extension";
+                showStatus(`Extension ${newState ? 'enabled' : 'disabled'}`);
             });
         });
     });
