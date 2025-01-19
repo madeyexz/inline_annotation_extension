@@ -22,14 +22,27 @@ chrome.storage.sync.get(['extensionEnabled'], (result) => {
             { action: "transformText", textContent: originalText },
             (response) => {
                 if (chrome.runtime.lastError) {
-                    console.error("Runtime error:", chrome.runtime.lastError);
+                    const errorMessage = chrome.runtime.lastError.message;
+                    console.error("Runtime error:", errorMessage);
+
+                    // Handle specific error cases
+                    if (errorMessage.includes("receiving end does not exist")) {
+                        console.error("Background service worker is not available");
+                    } else if (errorMessage.includes("The message port closed")) {
+                        console.error("Connection to background script was lost");
+                    } else if (errorMessage.includes("Extension context invalidated")) {
+                        console.error("Extension was updated or reloaded");
+                    }
+
+                    // Could potentially trigger a retry here
                     return;
                 }
+
                 if (response && response.success) {
                     console.log('Received response:', response);  // Debug log
                     p.innerText = response.data;
                 } else {
-                    console.error("Error from background script:", response.error);
+                    console.error("Error from background script:", response?.error || "Unknown error");
                 }
             }
         );
