@@ -5,7 +5,8 @@
 Innline Annotation is a Chrome extension that automatically adds brief explanations in parentheses after technical or specialized terms while you browse the web. It makes complex content instantly more understandable without changing the original text structure or requiring you to leave the page.
 
 
-> [!EXAMPLE]
+> [!NOTE]
+> ### Example of effect
 > 
 > Before: The quantum entanglement phenomenon demonstrates nonlocality, challenging our understanding of quantum mechanics and EPR paradox.
 > 
