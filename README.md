@@ -2,7 +2,7 @@
 
 ## Overview
 
-Innline Annotation is a Chrome extension that enhances readability by automatically adding concise, parenthetical explanations to specialized terms in web content. It's designed to make complex content more accessible by providing instant, contextual definitions while preserving the original text flow.
+Innline Annotation is a Chrome extension that automatically adds brief explanations in parentheses after technical or specialized terms while you browse the web. It makes complex content instantly more understandable without changing the original text structure or requiring you to leave the page.
 
 
 > [!EXAMPLE]
@@ -24,10 +24,12 @@ Innline Annotation is a Chrome extension that enhances readability by automatica
 
 ## Installation
 
+You can go to Chrome Extension Store and and install.
+
 1. **Clone the Repository**
 
    ```bash
-   git clone https://github.com/yourusername/innline-annotation.git
+   git clone https://github.com/madeyexz/inline_annotation_extension.git
    ```
 
 2. **Navigate to the Extension Directory**
