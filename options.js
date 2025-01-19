@@ -1,17 +1,13 @@
 // options.js
 
 document.addEventListener("DOMContentLoaded", () => {
-    const apiKeyInput = document.getElementById("apiKey");
     const saveBtn = document.getElementById("save");
     const familiarTopicsInput = document.getElementById("familiarTopics");
     const toggleBtn = document.getElementById("toggleExtension");
     const statusMessage = document.getElementById("statusMessage");
 
     // Load saved settings
-    chrome.storage.sync.get(["openaiApiKey", "familiarTopics", "extensionEnabled"], (result) => {
-        if (result.openaiApiKey) {
-            apiKeyInput.value = result.openaiApiKey;
-        }
+    chrome.storage.sync.get(["familiarTopics", "extensionEnabled"], (result) => {
         if (result.familiarTopics) {
             familiarTopicsInput.value = result.familiarTopics;
         }
@@ -42,16 +38,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Save settings
     saveBtn.addEventListener("click", () => {
-        const apiKey = apiKeyInput.value.trim();
         const familiarTopics = familiarTopicsInput.value.trim();
 
-        if (!apiKey) {
-            showStatus("Please enter an API key", true);
-            return;
-        }
-
         chrome.storage.sync.set({
-            openaiApiKey: apiKey,
             familiarTopics: familiarTopics
         }, () => {
             showStatus("Settings saved successfully!");
