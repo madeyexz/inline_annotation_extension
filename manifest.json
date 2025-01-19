@@ -1,6 +1,6 @@
 {
-  "name": "Innline annotation",
-  "description": "Makes it easier to read news and papers by adding annotations to the text",
+  "name": "Innline Annotation",
+  "description": "Adds explanations after technical or specialized terms",
   "version": "0.0.1",
   "manifest_version": 3,
   "permissions": ["storage", "activeTab", "scripting"],
@@ -16,7 +16,7 @@
     }
   ],
   "action": {
-    "default_title": "Term Explainer",
+    "default_title": "Innline Annotation",
     "default_popup": "options.html"
   },
   "options_page": "options.html"
