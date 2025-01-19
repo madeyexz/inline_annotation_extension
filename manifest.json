@@ -1,12 +1,13 @@
 {
-  "name": "Innline annotation Extension",
-  "description": "將網頁中的專有名詞改寫為「專有名詞（簡單解釋）」的形式",
+  "name": "Innline annotation",
+  "description": "Makes it easier to read news and papers by adding annotations to the text",
   "version": "0.0.1",
   "manifest_version": 3,
   "permissions": ["storage", "activeTab", "scripting"],
   "host_permissions": ["<all_urls>"],
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "background.js",
+    "type": "module"
   },
   "content_scripts": [
     {
