@@ -3,7 +3,7 @@
   "description": "Adds explanations after technical or specialized terms",
   "version": "0.0.1",
   "manifest_version": 3,
-  "permissions": ["storage", "activeTab", "scripting"],
+  "permissions": ["storage"],
   "host_permissions": ["<all_urls>"],
   "background": {
     "service_worker": "background.js",
